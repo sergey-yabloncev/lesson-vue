@@ -14,36 +14,38 @@
 
     <div id="app">
         <div class="container mt-5">
-        <div class="row">
-            <div class="col"><h1>{{users.length }} users</h1></div>
-            <div class="col">
-                <button type="button" @click="switcher" class="btn btn-secondary">show/hide</button>
+            <div class="row">
+                <div class="col"><h1>{{users.length }} users</h1></div>
+                <div class="col">
+                    <button type="button" @click="switcher" class="btn btn-secondary">show/hide</button>
+                </div>
             </div>
-        </div>
-        <table class="table table-hover table-striped" :class="[visible || 'd-none']">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>Patronymic</th>
-              <th>Photo</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user, key)  in users">
-          <th>{{ key + 1 }}</th>
-          <td>{{ user.name }}</td>
-          <td>{{ user.surname }}</td>
-          <td>{{ user.patronymic }}</td>
-          <td>
-            <img v-if="user.image.length > 0" :src="user.image" alt="">
-            <p v-else>показывать аватарку по умолчанию<p>
-            </td>
-        </tr>
+            <table class="table table-hover table-striped" :class="[visible || 'd-none']">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Patronymic</th>
+                  <th>Photo</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user, key)  in users">
+              <th>{{ key + 1 }}</th>
+              <td>{{ user.name | uppercase }}</td>
+              <td>{{ user.surname }}</td>
+              <td>{{ user.patronymic }}</td>
+              <td>
+                <img v-if="user.image.length > 0" :src="user.image" alt="">
+                <p v-else>показывать аватарку по умолчанию<p>
+                </td>
+                <td><button type="button" v-copy="key" class="btn btn-secondary">copy</button></td>
+            </tr>
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>
 </div>
 
@@ -85,11 +87,22 @@
         },
         ]
     },
-    methods: {
-        switcher: function () {
-            this.visible = !this.visible;
-        }
+    filters: {
+        uppercase: function (value) {
+        return value.toUpperCase();
     }
+},
+directives: {
+  copy: {
+   
+  },
+
+},
+methods: {
+    switcher: function () {
+        this.visible = !this.visible;
+    }
+}
 
 });
 </script>
