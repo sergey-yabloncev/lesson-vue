@@ -17,7 +17,7 @@
                     <td>{{ user.firstName }}</td>
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.phone }}</td>
-                    <td>{{ user.company }}</td>
+                    <td>{{ user.company | uppercase }}</td>
                     <td>
                         <router-link :to="{ name: 'edit-user', params: { id: user.id }}"
                                      class="btn btn-sm btn-outline-secondary">
